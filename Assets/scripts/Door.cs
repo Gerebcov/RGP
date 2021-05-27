@@ -13,7 +13,7 @@ public class Door: BaseMechanism
     [SerializeField]
     bool myltiplyUsage = false;
 
-    protected override void Trigger_OnEnter()
+    protected override void Trigger_OnActive()
     {
         isActive = !isActive;
         if (ActiveState)
@@ -22,6 +22,6 @@ public class Door: BaseMechanism
             InactiveState.SetActive(!isActive);
 
         if(!myltiplyUsage)
-            trigger.OnEnter -= Trigger_OnEnter;
+            Trigger.OnActive -= Trigger_OnActive;
     }
 }

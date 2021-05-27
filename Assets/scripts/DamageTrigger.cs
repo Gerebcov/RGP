@@ -1,30 +1,16 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class DamageTrigger : GameTrigger
+public class DamageTrigger : BaseObject, IDamageHandler, ITrigger
 {
     [SerializeField]
-    DamegeTypes damageType;
-    [SerializeField]
-    float damage;
+    DamegeTypes damegeType;
 
-    public DamegeTypes DamageType => damageType;
-    public float Damage => damage;
+    public event System.Action OnActive;
 
-    protected override void OnEnterObject(BaseObject baseObject)
+    public void SetDamage(DamegeTypes type, float damage)
     {
-        base.OnEnterObject(baseObject);
-        StartCoroutine(WaitEndFrame(baseObject));
-    }
-
-    IEnumerator WaitEndFrame(BaseObject baseObject)
-    {
-        yield return new WaitForEndOfFrame();
-        Contact(baseObject);
-    }
-
-    public virtual void Contact(BaseObject baseObject)
-    {
+        if (type == damegeType)
+            OnActive?.Invoke();
     }
 }
 

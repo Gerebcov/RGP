@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class DamageHandler : GameTrigger
+public class DamageHandler : BaseObject, IDamageHandler
 {
     [SerializeField]
     Defance[] defances = new Defance[0];
@@ -8,15 +8,7 @@ public class DamageHandler : GameTrigger
     [SerializeField]
     MortalObject mortalObject;
 
-    protected override void OnEnterObject(BaseObject baseObject)
-    {
-        base.OnEnterObject(baseObject);
-        var dt = baseObject.gameObject.GetComponent<DamageTrigger>();
-        if (dt != null)
-            DemageHandler(dt.DamageType, dt.Damage);
-    }
-
-    void DemageHandler(DamegeTypes type, float damage)
+    public void SetDamage(DamegeTypes type, float damage)
     {
         var defence = System.Array.Find(defances, d => d.types == type);
         if (defence != null)
@@ -35,9 +27,9 @@ public class DamageHandler : GameTrigger
 
 public enum DamegeTypes
 {
-    Fire,
-    Lightning,
-    Ice,
-    Net
+    Fire = 1,
+    Lightning = 2,
+    Ice = 4,
+    Net = 8
 }
 

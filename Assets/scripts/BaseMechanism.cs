@@ -3,14 +3,16 @@
 public class BaseMechanism : MonoBehaviour
 {
     [SerializeField]
-    protected GameTrigger trigger;
+    protected MonoBehaviour trigger;
+
+    protected ITrigger Trigger => trigger as ITrigger;
 
     private void Start()
     {
-        trigger.OnEnter += Trigger_OnEnter;
+        Trigger.OnActive += Trigger_OnActive;
     }
 
-    protected virtual void Trigger_OnEnter()
+    protected virtual void Trigger_OnActive()
     {
         
     }

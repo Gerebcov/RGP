@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Bulet : DamageTrigger
+public class Bulet : DamageSender
 {
     [SerializeField]
     Rigidbody2D rigidbody2D;
@@ -19,8 +19,9 @@ public class Bulet : DamageTrigger
         this.vector = vector;
     }
 
-    public override void Contact(BaseObject baseObject)
+    public override void Contact(IDamageHandler handler)
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+        Destroy(gameObject, 1);
     }
 }

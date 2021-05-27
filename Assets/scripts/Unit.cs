@@ -30,7 +30,7 @@ public class Unit : MortalObject
     private void Awake()
     {
         if(checkLandTrigger)
-            checkLandTrigger.OnEnter += CheckLandTrigger_OnEnter;
+            checkLandTrigger.OnActive += CheckLandTrigger_OnEnter;
     }
 
     private void CheckLandTrigger_OnEnter()
