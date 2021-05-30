@@ -3,11 +3,15 @@
 public class Bulet : DamageSender
 {
     [SerializeField]
-    Rigidbody2D rigidbody2D;
+    protected Rigidbody2D rigidbody2D;
     [SerializeField]
-    Vector2 velocity;
+    float velocity;
     [SerializeField]
     Vector2 vector;
+
+    [SerializeField]
+    float autoDestroyTime = 1.5f;
+    float time = 0;
 
     private void Start()
     {
@@ -19,9 +23,10 @@ public class Bulet : DamageSender
         this.vector = vector;
     }
 
-    public override void Contact(IDamageHandler handler)
+    private void Update()
     {
-        gameObject.SetActive(false);
-        Destroy(gameObject, 1);
+        time += Time.deltaTime;
+        if (time >= autoDestroyTime)
+            Destroy(gameObject);
     }
 }

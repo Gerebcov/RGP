@@ -12,6 +12,7 @@ public class Weapon: MonoBehaviour
     [SerializeField]
     float reload;
 
+    [SerializeField]
     bool isActive = false;
     float time;
 

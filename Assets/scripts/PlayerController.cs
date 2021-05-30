@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     KeyCode lMove = KeyCode.A;
     [SerializeField]
     KeyCode jamp = KeyCode.W;
+    [SerializeField]
+    KeyCode fall = KeyCode.S;
 
     [SerializeField]
     WeaponKey[] weaponKeys;
@@ -17,12 +19,20 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(rMove))
-            unit.Move(1f);
-        if (Input.GetKey(lMove))
-            unit.Move(-1f);
+        if ((!Input.GetKey(rMove) && !Input.GetKey(lMove)) || (Input.GetKey(rMove) && Input.GetKey(lMove)))
+            unit.Move(0);
+        else
+        {
+            if (Input.GetKey(rMove))
+                unit.Move(1f);
+            if (Input.GetKey(lMove))
+                unit.Move(-1f);
+        }
         if (Input.GetKeyDown(jamp))
             unit.Jump();
+        if (Input.GetKeyDown(fall))
+            unit.Fall();
+
 
         for (int i = 0; i < weaponKeys.Length; i++)
         {

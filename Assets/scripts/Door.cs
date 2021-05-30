@@ -15,13 +15,22 @@ public class Door: BaseMechanism
 
     protected override void Trigger_OnActive()
     {
-        isActive = !isActive;
+        isActive = true;
         if (ActiveState)
             ActiveState.SetActive(isActive);
         if (InactiveState)
             InactiveState.SetActive(!isActive);
 
         if(!myltiplyUsage)
-            Trigger.OnActive -= Trigger_OnActive;
+            Unsubscribe();
+    }
+
+    protected override void Trigger_OnDeactivate()
+    {
+        isActive = false;
+        if (ActiveState)
+            ActiveState.SetActive(isActive);
+        if (InactiveState)
+            InactiveState.SetActive(!isActive);
     }
 }

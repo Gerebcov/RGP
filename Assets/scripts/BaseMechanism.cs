@@ -9,7 +9,24 @@ public class BaseMechanism : MonoBehaviour
 
     private void Start()
     {
+        Subscribe();
+    }
+
+    protected void Subscribe()
+    {
         Trigger.OnActive += Trigger_OnActive;
+        Trigger.OnDeactivate += Trigger_OnDeactivate;
+    }
+
+    protected void Unsubscribe()
+    {
+        Trigger.OnActive -= Trigger_OnActive;
+        Trigger.OnDeactivate -= Trigger_OnDeactivate;
+    }
+
+    protected virtual void Trigger_OnDeactivate()
+    {
+
     }
 
     protected virtual void Trigger_OnActive()

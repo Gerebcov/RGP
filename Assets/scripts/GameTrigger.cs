@@ -8,9 +8,16 @@ public class GameTrigger : BaseObject, ITrigger
     public bool Enter { get; protected set; }
 
     public event System.Action OnActive;
+    public event System.Action OnDeactivate;
+
+
+    protected bool isActive = true;
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
+        if (!isActive)
+            return;
+
         var bo = collision.gameObject.GetComponent<BaseObject>();
         if (bo != null && (bo.Type & contactTypes) != 0)
         {
@@ -29,13 +36,14 @@ public class GameTrigger : BaseObject, ITrigger
         var bo = collision.gameObject.GetComponent<BaseObject>();
         if (bo != null && (bo.Type & contactTypes) != 0)
         {
-            OnEnterObject(bo);
+            OnExitObject(bo);
         }
     }
 
     protected virtual void OnExitObject(BaseObject baseObject)
     {
         Enter = false;
+        OnDeactivate?.Invoke();
     }
 
 }

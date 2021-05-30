@@ -11,10 +11,10 @@ public class DamageSender : GameTrigger
     public DamegeTypes DamageType => damageType;
     public float Damage => damage;
 
+    bool waitDestroy = false;
+
     protected override void OnEnterObject(BaseObject baseObject)
     {
-        //StartCoroutine(WaitEndFrame(baseObject));
-
         var handler = baseObject as IDamageHandler;
         if (handler != null)
             handler.SetDamage(DamageType, Damage);
@@ -29,25 +29,14 @@ public class DamageSender : GameTrigger
 
     }
 
-    IEnumerator WaitEndFrame(BaseObject baseObject)
-    {
-        var handler = baseObject as IDamageHandler;
-        if (handler != null)
-            handler.SetDamage(DamageType, Damage);
-        if (handler != null)
-            Contact(handler);
-        else
-            Contact(baseObject);
-        yield return new WaitForEndOfFrame();
-    }
-
     public virtual void Contact(IDamageHandler handler)
     {
-
+        if (!waitDestroy)
+            Destroy(gameObject);
     }
     public virtual void Contact(BaseObject baseObject)
     {
-        if (baseObject.Type == ObjectTypes.Word)
+        if (baseObject.Type == ObjectTypes.Word && !waitDestroy)
             Destroy(gameObject);
     }
 }
