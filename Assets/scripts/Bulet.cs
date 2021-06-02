@@ -12,9 +12,9 @@ public class Bulet : DamageSender
     [SerializeField]
     float autoDestroyTime = 1.5f;
     float time = 0;
-
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         rigidbody2D.velocity = velocity * vector;
     }
 
@@ -27,6 +27,16 @@ public class Bulet : DamageSender
     {
         time += Time.deltaTime;
         if (time >= autoDestroyTime)
-            Destroy(gameObject);
+        {
+            waitDestroy = true;
+            Deactivate();
+        }
+    }
+
+    protected override void Deactivate()
+    {
+        rigidbody2D.velocity = Vector3.zero;
+        rigidbody2D.bodyType = RigidbodyType2D.Kinematic;
+        base.Deactivate();
     }
 }

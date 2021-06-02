@@ -10,7 +10,7 @@ public class Unit : MortalObject
     float speed;
     [Range(0, .3f)] [SerializeField] private float m_FlySmoothing = .05f;
     [SerializeField]
-    float jumpForce;
+    float jumpVelocity;
     [SerializeField]
     float jampReload;
 
@@ -70,7 +70,8 @@ public class Unit : MortalObject
 
         jamp = true;
         canJamp = false;
-        rigidbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        var targetVelocity = new Vector2(rigidbody.velocity.x, jumpVelocity);
+        rigidbody.velocity = targetVelocity;
         StartCoroutine(ReloadJamp());
         fall = false;
     }

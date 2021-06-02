@@ -11,7 +11,24 @@ public class DamageSender : GameTrigger
     public DamegeTypes DamageType => damageType;
     public float Damage => damage;
 
-    bool waitDestroy = false;
+
+    [SerializeField]
+    MonoBehaviour idleVisual;
+    [SerializeField]
+    MonoBehaviour contactVisual;
+
+    protected bool waitDestroy = false;
+    protected IEffect IdleVisual => idleVisual as IEffect;
+    protected IEffect ContactVisual => contactVisual as IEffect;
+
+    [SerializeField]
+    protected float delayDestroy;
+
+    protected virtual void Start()
+    {
+        if (IdleVisual != null)
+            IdleVisual.Activate();
+    }
 
     protected override void OnEnterObject(BaseObject baseObject)
     {
@@ -32,12 +49,33 @@ public class DamageSender : GameTrigger
     public virtual void Contact(IDamageHandler handler)
     {
         if (!waitDestroy)
-            Destroy(gameObject);
+        {
+            StartCoroutine(WaitDeactivate());
+        }
     }
     public virtual void Contact(BaseObject baseObject)
     {
         if (baseObject.Type == ObjectTypes.Word && !waitDestroy)
-            Destroy(gameObject);
+        {
+            StartCoroutine(WaitDeactivate());
+        }
+    }
+
+    protected virtual IEnumerator WaitDeactivate()
+    {
+        waitDestroy = true;
+        yield return new WaitForEndOfFrame();
+        Deactivate();
+    }
+
+    protected virtual void Deactivate()
+    {
+        if (IdleVisual != null)
+            IdleVisual.Deactivate();
+        isActive = false;
+        if (ContactVisual != null)
+            ContactVisual.Activate();
+        Destroy(gameObject, delayDestroy);
     }
 }
 
