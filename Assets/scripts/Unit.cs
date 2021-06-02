@@ -82,6 +82,8 @@ public class Unit : MortalObject
             return;
         fall = true;
         platformColliser.enabled = false;
+        var targetVelocity = new Vector2(rigidbody.velocity.x, jumpVelocity * -0.3f);
+        rigidbody.velocity = targetVelocity;
         StartCoroutine(ReloadFall());
     }
 
