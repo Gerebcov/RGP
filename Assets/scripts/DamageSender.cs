@@ -30,7 +30,7 @@ public class DamageSender : GameTrigger
             IdleVisual.Activate();
     }
 
-    protected override void OnEnterObject(BaseObject baseObject)
+    protected override void EnterObject(BaseObject baseObject)
     {
         var handler = baseObject as IDamageHandler;
         if (handler != null)
@@ -41,7 +41,7 @@ public class DamageSender : GameTrigger
             Contact(baseObject);
     }
 
-    protected override void OnExitObject(BaseObject baseObject)
+    protected override void ExitObject(BaseObject baseObject)
     {
 
     }

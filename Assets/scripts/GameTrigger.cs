@@ -10,6 +10,8 @@ public class GameTrigger : BaseObject, ITrigger
     public event System.Action OnActive;
     public event System.Action OnDeactivate;
 
+    public event System.Action<BaseObject> OnEnterObject;
+    public event System.Action<BaseObject> OnExitObject;
 
     protected bool isActive = true;
 
@@ -21,14 +23,15 @@ public class GameTrigger : BaseObject, ITrigger
         var bo = collision.gameObject.GetComponent<BaseObject>();
         if (bo != null && (bo.Type & contactTypes) != 0)
         {
-            OnEnterObject(bo);
+            EnterObject(bo);
         }
     }
 
-    protected virtual void OnEnterObject(BaseObject baseObject)
+    protected virtual void EnterObject(BaseObject baseObject)
     {
         Enter = true;
         OnActive?.Invoke();
+        OnEnterObject?.Invoke(baseObject);
     }
 
     protected virtual void OnTriggerExit2D(Collider2D collision)
@@ -36,14 +39,15 @@ public class GameTrigger : BaseObject, ITrigger
         var bo = collision.gameObject.GetComponent<BaseObject>();
         if (bo != null && (bo.Type & contactTypes) != 0)
         {
-            OnExitObject(bo);
+            ExitObject(bo);
         }
     }
 
-    protected virtual void OnExitObject(BaseObject baseObject)
+    protected virtual void ExitObject(BaseObject baseObject)
     {
         Enter = false;
         OnDeactivate?.Invoke();
+        OnExitObject?.Invoke(baseObject);
     }
 
 }
