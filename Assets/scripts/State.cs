@@ -11,6 +11,6 @@ public class State
     {
         Start = start;
         Update = update;
-        end = End;
+        End = end;
     }
 }
