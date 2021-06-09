@@ -1,6 +1,6 @@
 ﻿public interface IEffect
 {
-    float Time { get; }
+    float Duration { get; }
 
     void Activate();
 

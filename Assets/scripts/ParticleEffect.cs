@@ -6,7 +6,7 @@ public class ParticleEffect : MonoBehaviour, IEffect
     ParticleSystem particle;
     [SerializeField]
     ParticleSystemStopBehavior stopType;
-    public float Time => particle.main.duration;
+    public float Duration => particle.main.duration;
 
     public void Activate()
     {

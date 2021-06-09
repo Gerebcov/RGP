@@ -5,7 +5,7 @@ public class GameTrigger : BaseObject, ITrigger
     [SerializeField]
     ObjectTypes contactTypes;
 
-    public bool Enter { get; protected set; }
+    public bool Enter => contacts > 0;
 
     public event System.Action OnActive;
     public event System.Action OnDeactivate;
@@ -14,6 +14,8 @@ public class GameTrigger : BaseObject, ITrigger
     public event System.Action<BaseObject> OnExitObject;
 
     protected bool isActive = true;
+
+    int contacts = 0;
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
@@ -29,7 +31,7 @@ public class GameTrigger : BaseObject, ITrigger
 
     protected virtual void EnterObject(BaseObject baseObject)
     {
-        Enter = true;
+        contacts++;
         OnActive?.Invoke();
         OnEnterObject?.Invoke(baseObject);
     }
@@ -45,7 +47,7 @@ public class GameTrigger : BaseObject, ITrigger
 
     protected virtual void ExitObject(BaseObject baseObject)
     {
-        Enter = false;
+        contacts--;
         OnDeactivate?.Invoke();
         OnExitObject?.Invoke(baseObject);
     }

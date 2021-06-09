@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class Bulet : DamageSender
 {
@@ -10,11 +11,26 @@ public class Bulet : DamageSender
     Vector2 vector;
 
     [SerializeField]
+    MonoBehaviour idleVisual;
+    [SerializeField]
+    MonoBehaviour contactVisual;
+
+    protected bool waitDestroy = false;
+    protected IEffect IdleVisual => idleVisual as IEffect;
+    protected IEffect ContactVisual => contactVisual as IEffect;
+
+    [SerializeField]
+    protected float delayDestroy;
+
+
+    [SerializeField]
     float autoDestroyTime = 1.5f;
     float time = 0;
-    protected override void Start()
+
+    protected virtual void Start()
     {
-        base.Start();
+        if (IdleVisual != null)
+            IdleVisual.Activate();
         rigidbody2D.velocity = velocity * vector;
     }
 
@@ -33,10 +49,39 @@ public class Bulet : DamageSender
         }
     }
 
-    protected override void Deactivate()
+    protected virtual void Deactivate()
     {
         rigidbody2D.velocity = Vector3.zero;
         rigidbody2D.bodyType = RigidbodyType2D.Kinematic;
-        base.Deactivate();
+        if (IdleVisual != null)
+            IdleVisual.Deactivate();
+        isActive = false;
+        if (ContactVisual != null)
+            ContactVisual.Activate();
+        Destroy(gameObject, delayDestroy);
+    }
+
+    public override void Contact(IDamageHandler handler)
+    {
+        base.Contact(handler);
+        if (!waitDestroy)
+        {
+            StartCoroutine(WaitDeactivate());
+        }
+    }
+
+    public override void Contact(BaseObject baseObject)
+    {
+        if (baseObject.Type == ObjectTypes.Word && !waitDestroy)
+        {
+            StartCoroutine(WaitDeactivate());
+        }
+    }
+
+    protected virtual IEnumerator WaitDeactivate()
+    {
+        waitDestroy = true;
+        yield return new WaitForEndOfFrame();
+        Deactivate();
     }
 }

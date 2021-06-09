@@ -19,7 +19,7 @@ public class EnamyFighter : StateMachine
     [SerializeField]
     Weapon weapon;
 
-    Unit player;
+    DamageHandler player;
     float vector = 1;
 
     enum States
@@ -63,10 +63,10 @@ public class EnamyFighter : StateMachine
 
     private void PlayerTrigger_OnEnterObject(BaseObject obj)
     {
-        var unit = obj as Unit;
-        if(unit != null)
+        DamageHandler damageHandler = obj as DamageHandler;
+        if(damageHandler != null)
         {
-            player = unit;
+            player = damageHandler;
             SetState((int)States.GoToPlayer);
         }
     }

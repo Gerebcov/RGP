@@ -8,6 +8,8 @@ public class DamageHandler : BaseObject, IDamageHandler
     [SerializeField]
     MortalObject mortalObject;
 
+    public MortalObject MortalObject { get { return mortalObject; } }
+
     public void SetDamage(DamegeTypes type, float damage)
     {
         var defence = System.Array.Find(defances, d => d.types == type);
