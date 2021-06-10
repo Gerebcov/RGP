@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Arrow: Bulet
+public class Arrow: Bullet
 {
     private void Update()
     {

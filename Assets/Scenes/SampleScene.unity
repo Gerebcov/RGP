@@ -985,7 +985,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 4
-  damegeType: 4
+  damageType: 0
 --- !u!61 &102336774
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1482,7 +1482,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPoint: {fileID: 2102300428}
   isLocal: 0
-  bulet: {fileID: 20801909}
+  bullet: {fileID: 20801909}
   reload: 0.07
   isActive: 0
   isAutomatic: 1
@@ -22757,7 +22757,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 4
-  damegeType: 4
+  damageType: 0
 --- !u!61 &877541670
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -23034,7 +23034,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 4
-  damegeType: 4
+  damageType: 0
 --- !u!61 &1037270421
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -38917,7 +38917,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPoint: {fileID: 1055653479}
   isLocal: 0
-  bulet: {fileID: 1240482179}
+  bullet: {fileID: 1240482179}
   reload: 1
   isActive: 0
   isAutomatic: 0
@@ -39268,7 +39268,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 4
-  damegeType: 4
+  damageType: 0
 --- !u!61 &1360596448
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -49835,7 +49835,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPoint: {fileID: 1527124714}
   isLocal: 0
-  bulet: {fileID: 1462801214}
+  bullet: {fileID: 1462801214}
   reload: 1
   isActive: 1
   isAutomatic: 1
@@ -49900,7 +49900,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPoint: {fileID: 519315666}
   isLocal: 0
-  bulet: {fileID: 1838043692}
+  bullet: {fileID: 1838043692}
   reload: 0.5
   isActive: 0
   isAutomatic: 1
@@ -49967,7 +49967,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  damegeType: 1
+  damageType: 0
 --- !u!61 &1699743683
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -61187,7 +61187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 4
-  damegeType: 4
+  damageType: 0
 --- !u!61 &2057877444
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -61274,7 +61274,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPoint: {fileID: 1207922294}
   isLocal: 0
-  bulet: {fileID: 329033324}
+  bullet: {fileID: 329033324}
   reload: 0.5
   isActive: 0
   isAutomatic: 1
@@ -66355,7 +66355,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPoint: {fileID: 1927854931}
   isLocal: 0
-  bulet: {fileID: 1104848146}
+  bullet: {fileID: 1104848146}
   reload: 0.5
   isActive: 0
   isAutomatic: 1

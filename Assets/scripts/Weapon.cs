@@ -7,7 +7,7 @@ public class Weapon: MonoBehaviour
     [SerializeField]
     bool isLocal;
     [SerializeField]
-    Bulet bulet;
+    Bullet bullet;
 
     [SerializeField]
     float reload;
@@ -19,6 +19,14 @@ public class Weapon: MonoBehaviour
     bool isAutomatic = false;
     float time;
 
+    void Start()
+    {
+        time = reload;
+
+        if (isActive)
+            StartFire();
+    }
+
     public virtual void StartFire()
     {
         isActive = true;
@@ -26,8 +34,8 @@ public class Weapon: MonoBehaviour
 
     public virtual void Fire()
     {
-        bulet.SetVector((spawnPoint.position - transform.position).normalized);
-        Instantiate(bulet.gameObject, spawnPoint.position, spawnPoint.rotation, isLocal ? spawnPoint : null).SetActive(true);
+        bullet.SetVector((spawnPoint.position - transform.position).normalized);
+        Instantiate(bullet.gameObject, spawnPoint.position, spawnPoint.rotation, isLocal ? spawnPoint : null).SetActive(true);
         time = 0;
         if (!isAutomatic)
             StopFire();
@@ -38,10 +46,6 @@ public class Weapon: MonoBehaviour
         isActive = false;
     }
 
-    private void Start()
-    {
-        time = reload;
-    }
 
     protected virtual void Update()
     {

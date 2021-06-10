@@ -1,6 +1,6 @@
 ﻿public interface IDamageHandler
 {
-    public void SetDamage(DamegeTypes type, float damage);
+    public void SetDamage(DamageTypes type, float damage);
 }
 
 public interface ITrigger

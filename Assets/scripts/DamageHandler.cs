@@ -15,7 +15,7 @@ public class DamageHandler : BaseObject, IDamageHandler
 
     public MortalObject MortalObject { get { return mortalObject; } }
 
-    public void SetDamage(DamegeTypes type, float damage)
+    public void SetDamage(DamageTypes type, float damage)
     {
         var defence = System.Array.Find(defances, d => d.types == type);
         if (defence != null)
@@ -29,12 +29,12 @@ public class DamageHandler : BaseObject, IDamageHandler
     [SerializeField]
     public class Defance
     {
-        public DamegeTypes types;
+        public DamageTypes types;
         public float Resistance;
     }
 }
 
-public enum DamegeTypes
+public enum DamageTypes
 {
     Fire = 1,
     Lightning = 2,

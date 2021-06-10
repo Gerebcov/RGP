@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Door: BaseMechanism
+public class SwichActiveObjrctMechanism: BaseMechanism
 {
     [SerializeField]
     bool isActive = false;

@@ -4,11 +4,11 @@ using UnityEngine;
 public class DamageSender : GameTrigger
 {
     [SerializeField]
-    DamegeTypes damageType;
+    DamageTypes damageType;
     [SerializeField]
     float damage;
 
-    public DamegeTypes DamageType => damageType;
+    public DamageTypes DamageType => damageType;
     public float Damage => damage;
 
     protected override void EnterObject(BaseObject baseObject)

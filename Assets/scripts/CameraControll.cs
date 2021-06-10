@@ -10,7 +10,7 @@ public class CameraControll : MonoBehaviour
     Transform player;
 
     [SerializeField]
-    Vector3 offes;
+    Vector3 offset;
 
     private void Update()
     {
@@ -20,7 +20,7 @@ public class CameraControll : MonoBehaviour
         float height = Camera.main.orthographicSize * 2.0f;
         float width = height * Screen.width / Screen.height;
 
-        Vector3 position = player.position + offes;
+        Vector3 position = player.position + offset;
         position.x = Mathf.Clamp(position.x, zone.x + width / 2, zone.x + zone.width - width / 2);
         position.y = Mathf.Clamp(position.y, zone.y + height / 2, zone.y + zone.height - height / 2);
         camera.transform.position = position;

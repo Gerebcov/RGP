@@ -4,14 +4,14 @@ using UnityEngine;
 public class DamageTrigger : BaseObject, IDamageHandler, ITrigger
 {
     [SerializeField]
-    DamegeTypes damegeType;
+    DamageTypes damageType;
 
     public event Action OnActive;
     public event Action OnDeactivate;
 
-    public void SetDamage(DamegeTypes type, float damage)
+    public void SetDamage(DamageTypes type, float damage)
     {
-        if (type == damegeType)
+        if (type == damageType)
             OnActive?.Invoke();
     }
 }

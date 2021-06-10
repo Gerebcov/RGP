@@ -1,13 +1,13 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class Bulet : DamageSender
+public class Bullet : DamageSender
 {
     [SerializeField]
     protected Rigidbody2D rigidbody2D;
     [SerializeField]
     float velocity;
-    [SerializeField]
+
     Vector2 vector;
 
     [SerializeField]
