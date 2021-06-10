@@ -17,6 +17,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     Unit unit;
 
+    [SerializeField]
+    GameTrigger enamyContactTrigger;
+
     private void Update()
     {
         if ((!Input.GetKey(rMove) && !Input.GetKey(lMove)) || (Input.GetKey(rMove) && Input.GetKey(lMove)))
@@ -24,9 +27,9 @@ public class PlayerController : MonoBehaviour
         else
         {
             if (Input.GetKey(rMove))
-                unit.Move(1f);
+                unit.Move(enamyContactTrigger.Enter ? 0.3f : 1f) ;
             if (Input.GetKey(lMove))
-                unit.Move(-1f);
+                unit.Move(enamyContactTrigger.Enter ? -0.3f : -1f);
         }
         if (Input.GetKeyDown(jamp))
             unit.Jump();

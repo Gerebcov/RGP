@@ -8,6 +8,11 @@ public class DamageHandler : BaseObject, IDamageHandler
     [SerializeField]
     MortalObject mortalObject;
 
+    [SerializeField]
+    MonoBehaviour damageEffect;
+
+    IEffect DamageEffect => damageEffect as IEffect;
+
     public MortalObject MortalObject { get { return mortalObject; } }
 
     public void SetDamage(DamegeTypes type, float damage)
@@ -17,6 +22,8 @@ public class DamageHandler : BaseObject, IDamageHandler
             mortalObject.SetDamage(Mathf.Lerp(0, damage, defence.Resistance));
         else
             mortalObject.SetDamage(damage);
+
+        DamageEffect?.Activate();
     }
 
     [SerializeField]

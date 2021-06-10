@@ -29,7 +29,9 @@ public class Unit : MortalObject
     bool canJamp = true;
 
     bool jamp = false;
+    public bool IsJamp => jamp;
     bool fall = false;
+    public bool IsFall => fall;
 
     private void Awake()
     {
