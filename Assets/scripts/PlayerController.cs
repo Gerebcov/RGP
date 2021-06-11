@@ -7,7 +7,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     KeyCode lMove = KeyCode.A;
     [SerializeField]
-    KeyCode jamp = KeyCode.W;
+    GameTrigger enamyContactTrigger;
+    [SerializeField]
+    float MoveCorfitientOnContactEnemy = 0.3f;
+
+    [SerializeField]
+    KeyCode jump = KeyCode.W;
     [SerializeField]
     KeyCode fall = KeyCode.S;
 
@@ -17,8 +22,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     Unit unit;
 
-    [SerializeField]
-    GameTrigger enamyContactTrigger;
 
     private void Update()
     {
@@ -27,11 +30,11 @@ public class PlayerController : MonoBehaviour
         else
         {
             if (Input.GetKey(rMove))
-                unit.Move(enamyContactTrigger.Enter ? 0.3f : 1f) ;
+                unit.Move(enamyContactTrigger.Enter ? MoveCorfitientOnContactEnemy : 1f) ;
             if (Input.GetKey(lMove))
-                unit.Move(enamyContactTrigger.Enter ? -0.3f : -1f);
+                unit.Move(enamyContactTrigger.Enter ? -MoveCorfitientOnContactEnemy : -1f);
         }
-        if (Input.GetKeyDown(jamp))
+        if (Input.GetKeyDown(jump))
             unit.Jump();
         if (Input.GetKeyDown(fall))
             unit.Fall();

@@ -3,9 +3,6 @@
 public class EnemyController: MonoBehaviour
 {
     [SerializeField]
-    Unit unit;
-
-    [SerializeField]
     GameTrigger playerTrigger;
 
     [SerializeField]
