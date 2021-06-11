@@ -33,6 +33,8 @@ public class Unit : MortalObject
     bool fall = false;
     public bool IsFall => fall;
 
+    public bool Flip { get; private set; }
+
     private void Awake()
     {
         if(checkLandTrigger)
@@ -56,8 +58,16 @@ public class Unit : MortalObject
             var smoothing = checkLandTrigger.Enter ? m_MovementSmoothing : m_FlySmoothing;
             rigidbody.velocity = Vector3.SmoothDamp(rigidbody.velocity, targetVelocity, ref m_Velocity, smoothing);
         }
-        if(vector != 0)
-            visual.Flip(vector < 0);
+        if (vector != 0)
+        {
+            SetFlip(vector < 0);
+        }
+    }
+
+    public void SetFlip(bool flip)
+    {
+        Flip = flip;
+        visual.Flip(Flip);
     }
 
     public virtual void Jump()
