@@ -8,6 +8,7 @@ public class Bullet : DamageSender
     [SerializeField]
     float velocity;
 
+    [SerializeField][HideInInspector]
     Vector2 vector;
 
     [SerializeField]
