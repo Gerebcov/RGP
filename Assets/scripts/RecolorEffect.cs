@@ -36,5 +36,7 @@ public class RecolorEffect : MonoBehaviour, IEffect
     public void Deactivate()
     {
         StopAllCoroutines();
+        var color = gradient.Evaluate(1);
+        sprite.color = color;
     }
 }

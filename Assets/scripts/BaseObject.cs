@@ -10,10 +10,10 @@ public class BaseObject : MonoBehaviour
     public ObjectTypes Type => type;
 }
 
-[System.FlagsAttribute]
-public enum ObjectTypes : byte
+[System.Flags]
+public enum ObjectTypes 
 {
-    Word = 1,
-    Player = 2,
-    Enemy = 4
+    Word = 0x1,
+    Player = 0x2,
+    Enemy = 0x4,
 }
