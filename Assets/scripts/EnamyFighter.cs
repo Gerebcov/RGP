@@ -111,7 +111,8 @@ public class EnamyFighter : StateMachine
     private void UpdateAttack()
     {
         var playerVector = player.transform.position.x - unit.transform.position.x;
-
+        if (playerVector < 0 != unit.Flip)
+            unit.SetFlip(playerVector < 0);
         if (Mathf.Abs(playerVector) > atackDistance)
         {
             SetState((int)States.GoToPlayer);
