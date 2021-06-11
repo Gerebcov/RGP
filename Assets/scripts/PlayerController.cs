@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     Unit unit;
 
+    Weapon ActiveWeapon = null;
 
     private void Update()
     {
@@ -42,10 +43,16 @@ public class PlayerController : MonoBehaviour
 
         for (int i = 0; i < weaponKeys.Length; i++)
         {
-            if (Input.GetKeyDown(weaponKeys[i].keyCode))
-                weaponKeys[i].weapon.StartFire();
-            if (Input.GetKeyUp(weaponKeys[i].keyCode))
+            if (Input.GetKeyUp(weaponKeys[i].keyCode) && ActiveWeapon == weaponKeys[i].weapon)
+            {
+                ActiveWeapon = null;
                 weaponKeys[i].weapon.StopFire();
+            }
+            if (Input.GetKeyDown(weaponKeys[i].keyCode) && ActiveWeapon == null)
+            {
+                weaponKeys[i].weapon.StartFire();
+                ActiveWeapon = weaponKeys[i].weapon;
+            }
         }
     }
 
