@@ -18,6 +18,11 @@ public class PlayerController : MonoBehaviour
     KeyCode fall = KeyCode.S;
 
     [SerializeField]
+    KeyCode interact = KeyCode.Tab;
+    [SerializeField]
+    PlayerInteractableZone interactableZone;
+
+    [SerializeField]
     WeaponKey[] weaponKeys;
 
     [SerializeField]
@@ -40,20 +45,16 @@ public class PlayerController : MonoBehaviour
                 unit.Move(Vector2.left);
         }
 
+        if (Input.GetKey(lMove))
+            unit.Move(Vector2.left);
 
-        //if ((!Input.GetKey(rMove) && !Input.GetKey(lMove)) || (Input.GetKey(rMove) && Input.GetKey(lMove)))
-        //    unit.Move(0);
-        //else
-        //{
-        //    if (Input.GetKey(rMove))
-        //        unit.Move(enamyContactTrigger.Enter ? MoveCorfitientOnContactEnemy : 1f);
-        //    if (Input.GetKey(lMove))
-        //        unit.Move(enamyContactTrigger.Enter ? -MoveCorfitientOnContactEnemy : -1f);
-        //}
         if (Input.GetKeyDown(jump))
             unit.Jump();
         if (Input.GetKeyDown(fall))
             unit.Fall();
+
+        if (Input.GetKeyDown(interact))
+            interactableZone.Interact();
 
 
         for (int i = 0; i < weaponKeys.Length; i++)
