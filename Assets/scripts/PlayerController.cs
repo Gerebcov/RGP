@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -26,15 +27,29 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+
         if ((!Input.GetKey(rMove) && !Input.GetKey(lMove)) || (Input.GetKey(rMove) && Input.GetKey(lMove)))
-            unit.Move(0);
+        {
+
+        }
         else
         {
             if (Input.GetKey(rMove))
-                unit.Move(enamyContactTrigger.Enter ? MoveCorfitientOnContactEnemy : 1f) ;
+                unit.Move(Vector2.right);
             if (Input.GetKey(lMove))
-                unit.Move(enamyContactTrigger.Enter ? -MoveCorfitientOnContactEnemy : -1f);
+                unit.Move(Vector2.left);
         }
+
+
+        //if ((!Input.GetKey(rMove) && !Input.GetKey(lMove)) || (Input.GetKey(rMove) && Input.GetKey(lMove)))
+        //    unit.Move(0);
+        //else
+        //{
+        //    if (Input.GetKey(rMove))
+        //        unit.Move(enamyContactTrigger.Enter ? MoveCorfitientOnContactEnemy : 1f);
+        //    if (Input.GetKey(lMove))
+        //        unit.Move(enamyContactTrigger.Enter ? -MoveCorfitientOnContactEnemy : -1f);
+        //}
         if (Input.GetKeyDown(jump))
             unit.Jump();
         if (Input.GetKeyDown(fall))

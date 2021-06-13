@@ -7,5 +7,6 @@ public interface ITrigger
 {
     public event System.Action OnActive;
     public event System.Action OnDeactivate;
+    public bool IsActive { get; }
 }
 

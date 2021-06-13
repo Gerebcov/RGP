@@ -5,63 +5,29 @@ using UnityEngine.SceneManagement;
 
 public class Unit : MortalObject
 {
-    [Range(0, .3f)] [SerializeField] private float m_MovementSmoothing = .05f;
-    [SerializeField]
-    float speed;
-    [Range(0, .3f)] [SerializeField] private float m_FlySmoothing = .05f;
-    [SerializeField]
-    float jumpVelocity;
-    [SerializeField]
-    float jampReload;
-
     [SerializeField]
     UnitVisual visual;
-    [SerializeField]
-    Rigidbody2D rigidbody;
 
     [SerializeField]
-    Collider2D platformColliser;
+    UnitMover[] movers;
     [SerializeField]
-    GameTrigger checkLandTrigger;
-
-    private Vector3 m_Velocity = Vector3.zero;
-    int jampCount = 1; 
-    bool canJamp = true;
-
-    bool jamp = false;
-    public bool IsJamp => jamp;
-    bool fall = false;
-    public bool IsFall => fall;
+    UnitJumper[] jumpers;
+    [SerializeField]
+    UnitFaller[] fallers;
 
     public bool Flip { get; private set; }
 
-    private void Awake()
+    public void Move(Vector2 vector)
     {
-        if(checkLandTrigger)
-            checkLandTrigger.OnActive += CheckLandTrigger_OnEnter;
-    }
-
-    private void CheckLandTrigger_OnEnter()
-    {
-        canJamp = true;
-        jampCount = 1;
-        if (rigidbody.velocity.y <= 0)
-            jamp = false;
-    }
-
-    public virtual void Move(float vector)
-    {
-        if (checkLandTrigger.Enter || (!checkLandTrigger.Enter && vector != 0))
+        for (int i = 0; i < movers.Length; i++)
         {
-            var currentSpeed = speed * vector;
-            var targetVelocity = new Vector2(currentSpeed, rigidbody.velocity.y);
-            var smoothing = checkLandTrigger.Enter ? m_MovementSmoothing : m_FlySmoothing;
-            rigidbody.velocity = Vector3.SmoothDamp(rigidbody.velocity, targetVelocity, ref m_Velocity, smoothing);
+            if (movers[i].IsBlocked)
+                continue;
+
+            movers[i].Move(vector);
         }
-        if (vector != 0)
-        {
-            SetFlip(vector < 0);
-        }
+
+        SetFlip(vector.x < 0);
     }
 
     public void SetFlip(bool flip)
@@ -72,50 +38,26 @@ public class Unit : MortalObject
 
     public virtual void Jump()
     {
-        if (!canJamp)
-            return;
+        for (int i = 0; i < jumpers.Length; i++)
+        {
+            if (jumpers[i].IsBlocked)
+                continue;
 
-        if (!checkLandTrigger.Enter && jampCount > 0)
-            jampCount--;
-        else if (jampCount == 0)
-            return;
-
-        jamp = true;
-        canJamp = false;
-        var targetVelocity = new Vector2(rigidbody.velocity.x, jumpVelocity);
-        rigidbody.velocity = targetVelocity;
-        StartCoroutine(ReloadJamp());
-        fall = false;
+            jumpers[i].Jump();
+        }
+        return;
     }
 
     public void Fall()
     {
-        if (fall || !checkLandTrigger.Enter)
-            return;
-        fall = true;
-        platformColliser.enabled = false;
-        var targetVelocity = new Vector2(rigidbody.velocity.x, jumpVelocity * -0.3f);
-        rigidbody.velocity = targetVelocity;
-        StartCoroutine(ReloadFall());
-    }
+        for (int i = 0; i < fallers.Length; i++)
+        {
+            if (fallers[i].IsBlocked)
+                continue;
 
-    IEnumerator ReloadFall()
-    {
-        yield return new WaitForSeconds(0.5f);
-        fall = false;
-    }    
-
-    private void Update()
-    {
-        if(!fall)
-            platformColliser.enabled = (rigidbody.velocity.y <= 0) || !jamp;
-    }
-
-    IEnumerator ReloadJamp()
-    {
-        yield return new WaitForSeconds(jampReload);
-        if (!canJamp)
-            canJamp = true;
+            fallers[i].Fall();
+        }
+        return;
     }
 
     protected override void Death()

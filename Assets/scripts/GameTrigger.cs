@@ -7,6 +7,8 @@ public class GameTrigger : BaseObject, ITrigger
 
     public bool Enter => contacts > 0;
 
+    public bool IsActive => isActive;
+
     public event System.Action OnActive;
     public event System.Action OnDeactivate;
 
@@ -14,6 +16,7 @@ public class GameTrigger : BaseObject, ITrigger
     public event System.Action<BaseObject> OnExitObject;
 
     protected bool isActive = true;
+
 
     int contacts = 0;
 
@@ -32,7 +35,8 @@ public class GameTrigger : BaseObject, ITrigger
     protected virtual void EnterObject(BaseObject baseObject)
     {
         contacts++;
-        OnActive?.Invoke();
+        if(contacts == 1)
+            OnActive?.Invoke();
         OnEnterObject?.Invoke(baseObject);
     }
 
@@ -48,8 +52,8 @@ public class GameTrigger : BaseObject, ITrigger
     protected virtual void ExitObject(BaseObject baseObject)
     {
         contacts--;
-        OnDeactivate?.Invoke();
+        if (contacts == 0)
+            OnDeactivate?.Invoke();
         OnExitObject?.Invoke(baseObject);
     }
-
 }

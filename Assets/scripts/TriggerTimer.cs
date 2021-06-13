@@ -7,6 +7,8 @@ public class TriggerTimer : MonoBehaviour, ITrigger
     MonoBehaviour trigger;
     ITrigger ITrigger => trigger as ITrigger;
 
+    public bool IsActive => isActive;
+
     [SerializeField]
     float time;
 

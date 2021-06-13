@@ -20,7 +20,6 @@ public class EnamyFighter : StateMachine
     Weapon weapon;
 
     DamageHandler player;
-    float vector = 1;
 
     enum States
     {
@@ -47,12 +46,12 @@ public class EnamyFighter : StateMachine
 
     void UpdateIdle()
     {
-        if ((vector > 0 && unit.transform.position.x < moveRangeMax) ||
-            (vector < 0 && unit.transform.position.x > moveRangeMin))
-            unit.Move(vector);
+        if ((!unit.Flip && unit.transform.position.x < moveRangeMax) ||
+            (unit.Flip && unit.transform.position.x > moveRangeMin))
+            unit.Move(unit.Flip ? Vector2.left : Vector2.right);
         else
         {
-            vector *= -1;
+            unit.SetFlip(!unit.Flip);
         }
     }
 
@@ -90,12 +89,11 @@ public class EnamyFighter : StateMachine
     {
         var playerVector = player.transform.position.x - unit.transform.position.x;
 
-        if (Mathf.Abs(playerVector) > atackDistance || Mathf.Sign(playerVector) != vector)
+        if (Mathf.Abs(playerVector) > atackDistance || (playerVector > 0 && unit.Flip) || (playerVector < 0 && !unit.Flip))
         {
-            vector = Mathf.Sign(playerVector);
-            if ((vector > 0 && unit.transform.position.x < moveRangeMax) ||
-                (vector < 0 && unit.transform.position.x > moveRangeMin))
-                unit.Move(vector);
+            if ((!unit.Flip && unit.transform.position.x < moveRangeMax) ||
+                (unit.Flip && unit.transform.position.x > moveRangeMin))
+                unit.Move(unit.Flip ? Vector2.left : Vector2.right);
         }
         else
         {
