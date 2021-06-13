@@ -7,10 +7,6 @@ public class PlayerController : MonoBehaviour
     KeyCode rMove = KeyCode.D;
     [SerializeField]
     KeyCode lMove = KeyCode.A;
-    [SerializeField]
-    GameTrigger enamyContactTrigger;
-    [SerializeField]
-    float MoveCorfitientOnContactEnemy = 0.3f;
 
     [SerializeField]
     KeyCode jump = KeyCode.W;
