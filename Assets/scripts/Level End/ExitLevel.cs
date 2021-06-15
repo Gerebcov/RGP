@@ -1,39 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ExitLevel : MonoBehaviour
 {
-    [SerializeField] Collider2D PlayerCollider;
-    [SerializeField] Collider2D exitCollider;
-    [SerializeField] Animation idleAnimation;
-    [SerializeField] Animation endAnimation;
-    public ConditionOfPassageLevel[] ConditionOfPassageLevel;
-    bool isReadyToPass = false;
-    
+    [SerializeField] InteractableTrigger exitTrigger;
+    public ConditionOfPassageLevel[] ConditionsOfPassageLevel;
 
     private void Start()
     {
-        idleAnimation.Play();
+        exitTrigger.OnActive += ExitTrigger_OnActive;
     }
 
-    void CheckConditions()
+    private void ExitTrigger_OnActive()
     {
-        isReadyToPass = true;
-        for (int i = 0; i< ConditionOfPassageLevel.Length; i++)
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+
+    bool CheckConditions()
+    {
+        for (int i = 0; i< ConditionsOfPassageLevel.Length; i++)
 	    {
-            isReadyToPass = ConditionOfPassageLevel[i].isDone || isReadyToPass;
+            if (ConditionsOfPassageLevel[i].isDone == false)
+                return false;
         }
-    }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        CheckConditions();
-        if(collision.collider == PlayerCollider || isReadyToPass)
-        {
-            endAnimation.Play();
-            // block input
-            //show level end animation
-            //reload scene
-        }
-    }
+        return true;
+    }    
 }

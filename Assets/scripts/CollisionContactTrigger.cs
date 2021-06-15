@@ -9,8 +9,8 @@ public class CollisionContactTrigger : MonoBehaviour, ITrigger
     public event Action OnActive;
     public event Action OnDeactivate;
 
-    protected bool IsActive = false;
-    bool ITrigger.IsActive => IsActive;
+    protected bool isActive = false;
+    public bool IsActive => isActive;
 
     [SerializeField]
     ContactFilter2D filter2D;
@@ -19,11 +19,11 @@ public class CollisionContactTrigger : MonoBehaviour, ITrigger
     void Update()
     {
         var isTouching = collider.IsTouching(filter2D);
-        if (IsActive && !isTouching)
+        if (isActive && !isTouching)
             OnDeactivate?.Invoke();
-        else if (!IsActive && isTouching)
+        else if (!isActive && isTouching)
             OnActive?.Invoke();
 
-        IsActive = isTouching;
+        isActive = isTouching;
     }
 }

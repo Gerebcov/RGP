@@ -5,35 +5,24 @@ using UnityEngine;
 public class ConditionOfPassageLevel : MonoBehaviour
 {
     [HideInInspector] public bool isDone = false;
+    [HideInInspector] public EnemyToPass[] enemysToPass;
+    [HideInInspector] public float startTime;
     [SerializeField] TypeOfCondition typeOfCondition;
-    EnemyToPass[] enemysToPass;
-
-
-
-    private void Update()
-    {
-        
-    }
-
     void Start()
     {
-        /*switch (typeOfCondition)
+        switch (typeOfCondition)
         {
-            case defeatEnemy:
-                EnemyToPass[] enemysToPass = GetComponents<EnemyToPass>();
+            case TypeOfCondition.defeatEnemy:
+                enemysToPass = GetComponents<EnemyToPass>();
                 break;
-            case 1:
+            case TypeOfCondition.nothing:
                 isDone = true;
                 break;
-            case 2:
-                float startTime = Time.time;
+            case TypeOfCondition.byTime:
+                startTime = Time.time;
                 break;
-
-        }*/
-
-        
+        }
     }
-
     enum TypeOfCondition
     {
         defeatEnemy,
