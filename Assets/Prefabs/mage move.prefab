@@ -5204,8 +5204,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5122206874810740598}
-  - component: {fileID: 5122206874810740584}
-  - component: {fileID: 5122206874810740599}
   m_Layer: 7
   m_Name: left
   m_TagString: Untagged
@@ -5229,42 +5227,6 @@ Transform:
   m_Father: {fileID: 5122206875878965909}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5122206874810740584
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5122206874810740585}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab60a4ac61406314b924ffcb8a0de71c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  triggers:
-  - _interface: {fileID: 5122206874836514540}
-  - _interface: {fileID: 5122206874810740599}
-  or: 0
---- !u!114 &5122206874810740599
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5122206874810740585}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9aadfbfc50e37164b8de32b59f746972, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onActivateTrigger:
-    Triger:
-      _interface: {fileID: 5122206875264010519}
-    Inverse: 1
-  onDeactivateTrigger:
-    Triger:
-      _interface: {fileID: 5122206875264010519}
-    Inverse: 1
 --- !u!1 &5122206874836514543
 GameObject:
   m_ObjectHideFlags: 0
@@ -5738,12 +5700,21 @@ MonoBehaviour:
   unit: {fileID: 5122206875878965911}
   playerTrigger: {fileID: 5122206875697225089}
   agresiveTrigger: {fileID: 5122206874632587612}
-  cenMoveLeftTrigger:
-    _interface: {fileID: 5122206874810740584}
-  cenMoveRightTrigger:
-    _interface: {fileID: 5122206876371855439}
+  leftlLandTrigger:
+    _interface: {fileID: 5122206874836514540}
+  rightLandTrigger:
+    _interface: {fileID: 5122206876565313405}
+  leftWallTrigger:
+    _interface: {fileID: 5122206875264010519}
+  rightWallTrigger:
+    _interface: {fileID: 5122206875452401865}
   atackDistance: 7.5
   weapon: {fileID: 5122206876499317708}
+  idleModules: []
+  aggressiveModules: []
+  canJump: 0
+  minDistanssToJump: 2
+  hightToJump: 2
 --- !u!1 &5122206876072622498
 GameObject:
   m_ObjectHideFlags: 0
@@ -5836,8 +5807,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5122206876371855437}
-  - component: {fileID: 5122206876371855439}
-  - component: {fileID: 5122206876371855438}
   m_Layer: 7
   m_Name: right
   m_TagString: Untagged
@@ -5861,42 +5830,6 @@ Transform:
   m_Father: {fileID: 5122206875878965909}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5122206876371855439
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5122206876371855424}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab60a4ac61406314b924ffcb8a0de71c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  triggers:
-  - _interface: {fileID: 5122206876565313405}
-  - _interface: {fileID: 5122206876371855438}
-  or: 0
---- !u!114 &5122206876371855438
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5122206876371855424}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9aadfbfc50e37164b8de32b59f746972, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onActivateTrigger:
-    Triger:
-      _interface: {fileID: 5122206875452401865}
-    Inverse: 1
-  onDeactivateTrigger:
-    Triger:
-      _interface: {fileID: 5122206875452401865}
-    Inverse: 1
 --- !u!1 &5122206876499317709
 GameObject:
   m_ObjectHideFlags: 0
@@ -5947,7 +5880,7 @@ MonoBehaviour:
   bullet: {fileID: 1018425965669089687}
   reload: 2
   isActive: 0
-  isAutomatic: 1
+  isAutomatic: 0
 --- !u!1 &5122206876565313392
 GameObject:
   m_ObjectHideFlags: 0

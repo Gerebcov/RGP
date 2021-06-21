@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class ForceAccumulatingWeapon : Weapon
 {
@@ -11,35 +12,54 @@ public class ForceAccumulatingWeapon : Weapon
 
     float currentAccumulatingTime = 0;
 
-    protected override void Update()
+    protected override void Start()
     {
-        if(isActive)
+        InitState((int)WeaponStates.Accumulat, new State(AccumulatStart, AccumulatUpdate, AccumulatEnd));
+        base.Start();
+    }
+
+    protected override void IdleUpdate()
+    {
+        if (isActive)
+            SetState((int)WeaponStates.Accumulat);
+    }
+
+    protected override void ReloadUpdate()
+    {
+        time += Time.deltaTime;
+        if (time >= reload)
         {
-            if (currentAccumulatingTime < accumulatingTime)
+            if (isActive && isAutomatic)
             {
-                currentAccumulatingTime = Mathf.Min(accumulatingTime, currentAccumulatingTime + Time.deltaTime);
-                return;
+                SetState((int)WeaponStates.Accumulat);
+            }
+            else
+            {
+                isActive = false;
+                SetState((int)WeaponStates.Idle);
             }
         }
-
-        base.Update();
     }
 
-    public override void Fire()
+    protected virtual void AccumulatStart()
     {
+        State = WeaponStates.Accumulat;
         currentAccumulatingTime = 0;
-        base.Fire();
-    }
-    public override void StartFire()
-    {
-        base.StartFire();
         AccumulatingEffect?.Activate();
     }
 
-    public override void StopFire()
+    protected virtual void AccumulatUpdate()
     {
-        base.StopFire();
+        currentAccumulatingTime = currentAccumulatingTime + Time.deltaTime;
+
+        if (!isActive)
+            SetState((int)WeaponStates.Idle);
+        else if (currentAccumulatingTime >= accumulatingTime)
+            SetState((int)WeaponStates.Fire);
+    }
+
+    protected virtual void AccumulatEnd()
+    {
         AccumulatingEffect?.Deactivate();
-        currentAccumulatingTime = 0;
     }
 }

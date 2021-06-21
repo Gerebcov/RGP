@@ -7,6 +7,7 @@ public class StateMachine : MonoBehaviour
     Dictionary<int, State> states = new Dictionary<int, State>();
 
     State currentSatate;
+    protected int currentStateIndex;
 
     protected void InitState(int id, State state)
     {
@@ -21,6 +22,8 @@ public class StateMachine : MonoBehaviour
         }
         currentSatate = states[id];
         currentSatate.Start?.Invoke();
+
+        currentStateIndex = id;
     }
 
     private void Update()
