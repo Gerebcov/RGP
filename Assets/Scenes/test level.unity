@@ -308,7 +308,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPoint: {fileID: 661686354}
   isLocal: 0
-  bullet: {fileID: 1396234873}
+  bullet: {fileID: 1396234872}
   reload: 0.1
   isActive: 0
   isAutomatic: 1
@@ -22344,7 +22344,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPoint: {fileID: 574903945}
   isLocal: 0
-  bullet: {fileID: 1362257231}
+  bullet: {fileID: 1362257227}
   reload: 0.1
   isActive: 0
   isAutomatic: 1
@@ -22932,7 +22932,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPoint: {fileID: 1506503019}
   isLocal: 0
-  bullet: {fileID: 1934647952}
+  bullet: {fileID: 1934647951}
   reload: 0.1
   isActive: 0
   isAutomatic: 1

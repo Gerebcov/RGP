@@ -377,17 +377,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 2332420202598120105}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8faa81d0729494641959e384faee469c, type: 3}
+  m_Script: {fileID: 11500000, guid: 69127b055f235bf41a7989f272ea2fa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoint: {fileID: 2332420202679006221}
-  isLocal: 0
-  bullet: {fileID: 3079135294901377263}
+  isLocal: 1
+  bullet: {fileID: 4552778164324731116}
   reload: 0.5
   isActive: 0
   isAutomatic: 0
   accumulatingTime: 0.5
   accumulatingEffect: {fileID: 483585715219636907}
+  activeTime: 0.3
+  addedForce: 500
+  rigidbody2D: {fileID: 2332420203553877041}
 --- !u!114 &483585715219636907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1142,9 +1145,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8122405471205425401}
-  - component: {fileID: 3079135294901377263}
   - component: {fileID: 3413634306688877322}
-  - component: {fileID: 2541511193585637328}
+  - component: {fileID: 4189948352808392215}
+  - component: {fileID: 7967913323404694762}
   m_Layer: 0
   m_Name: ice bolt (1)
   m_TagString: Untagged
@@ -1160,36 +1163,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4552778164324731116}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 29.289642, y: 1.642196, z: 0}
+  m_LocalPosition: {x: -0.22, y: 0, z: 0}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children:
   - {fileID: 4497205159772749577}
   m_Father: {fileID: 2332420202598120111}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3079135294901377263
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4552778164324731116}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8439e7bda97f354b9fa295acf55d03a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 4
-  contactTypes: 3
-  damageType: 4
-  damage: 1
-  rigidbody2D: {fileID: 3413634306688877322}
-  velocity: 2
-  vector: {x: 0, y: 0}
-  idleVisual: {fileID: 0}
-  contactVisual: {fileID: 0}
-  delayDestroy: 0
-  autoDestroyTime: 1.5
 --- !u!50 &3413634306688877322
 Rigidbody2D:
   serializedVersion: 4
@@ -1198,7 +1178,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4552778164324731116}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -1211,8 +1191,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!60 &2541511193585637328
-PolygonCollider2D:
+--- !u!61 &4189948352808392215
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1224,7 +1204,7 @@ PolygonCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.18, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1234,17 +1214,25 @@ PolygonCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.26407468, y: -0.002875656}
-      - {x: 0.18381914, y: 0.11297104}
-      - {x: 0.17105901, y: 0.04467088}
-      - {x: -0.25773394, y: 0.041687667}
-      - {x: -0.4515461, y: 0.11652565}
-      - {x: -0.41689938, y: -0.08787882}
-      - {x: -0.2664135, y: -0.029655427}
-      - {x: 0.16780135, y: -0.040437505}
-      - {x: 0.17657086, y: -0.07970868}
+  serializedVersion: 2
+  m_Size: {x: 1.12, y: 1.59}
+  m_EdgeRadius: 0
+--- !u!114 &7967913323404694762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4552778164324731116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e078c3d691e0abf498d12b285d799d7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 0
+  contactTypes: 3
+  damageType: 8
+  damage: 5
 --- !u!1 &6667281698208802472
 GameObject:
   m_ObjectHideFlags: 0
@@ -1264,7 +1252,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4497205159772749577
 Transform:
   m_ObjectHideFlags: 0

@@ -32,12 +32,7 @@ public class Bullet : DamageSender
     {
         if (IdleVisual != null)
             IdleVisual.Activate();
-        rigidbody2D.velocity = velocity * vector;
-    }
-
-    public void SetVector(Vector2 vector)
-    {
-        this.vector = vector;
+        rigidbody2D.velocity = velocity * transform.right;
     }
 
     private void Update()

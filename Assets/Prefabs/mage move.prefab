@@ -5877,7 +5877,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPoint: {fileID: 5122206874806597580}
   isLocal: 0
-  bullet: {fileID: 1018425965669089687}
+  bullet: {fileID: 8821501778322505075}
   reload: 2
   isActive: 0
   isAutomatic: 0

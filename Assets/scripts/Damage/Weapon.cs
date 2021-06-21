@@ -3,11 +3,11 @@
 public class Weapon: StateMachine
 {
     [SerializeField]
-    Transform spawnPoint;
+    protected Transform spawnPoint;
     [SerializeField]
     bool isLocal;
     [SerializeField]
-    Bullet bullet;
+    protected GameObject bullet;
 
     [SerializeField]
     protected float reload;
@@ -27,7 +27,7 @@ public class Weapon: StateMachine
         time = reload;
 
         InitState((int)WeaponStates.Idle, new State(IdleStart, IdleUpdate, null));
-        InitState((int)WeaponStates.Fire, new State(FireStart, null, null));
+        InitState((int)WeaponStates.Fire, new State(FireStart, FireUpdate, FireEnd));
         InitState((int)WeaponStates.Reload, new State(ReloadStart, ReloadUpdate, null));
 
         if (isActive)
@@ -50,10 +50,22 @@ public class Weapon: StateMachine
     protected virtual void FireStart()
     {
         State = WeaponStates.Fire;
-        bullet.SetVector((spawnPoint.position - transform.position).normalized);
-        Instantiate(bullet.gameObject, spawnPoint.position, spawnPoint.rotation, isLocal ? spawnPoint : null).SetActive(true);
+        Vector2 toPosition = (spawnPoint.position - transform.position).normalized;
+        float angle = Mathf.Atan2(toPosition.y, toPosition.x) * Mathf.Rad2Deg;
+        Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
+        Instantiate(bullet.gameObject, spawnPoint.position, q, isLocal ? spawnPoint : null).SetActive(true);
+
         time = 0;
         SetState((int)WeaponStates.Reload);
+    }
+
+    protected virtual void FireUpdate()
+    {
+    }
+
+    protected virtual void FireEnd()
+    {
+
     }
 
     protected virtual void ReloadStart()
