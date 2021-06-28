@@ -7,6 +7,7 @@ public class MortalObject: BaseObject
 
     public event System.Action OnSetDamage;
     public event System.Action OnDeath;
+    public float HeetsPoint => heetPoints;
 
     public virtual void SetDamage(float damage)
     {
